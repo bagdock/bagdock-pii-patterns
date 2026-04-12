@@ -1,11 +1,40 @@
+```
+  ----++                                ----++                    ---+++     
+  ---+++                                ---++                     ---++      
+ ----+---     -----     ---------  --------++ ------     -----   ----++----- 
+ ---------+ --------++----------++--------+++--------+ --------++---++---++++
+ ---+++---++ ++++---++---+++---++---+++---++---+++---++---++---++------++++  
+----++ ---++--------++---++----++---+++---++---++ ---+---++     -------++    
+----+----+---+++---++---++----++---++----++---++---+++--++ --------+---++   
+---------++--------+++--------+++--------++ -------+++ -------++---++----++  
+ +++++++++   +++++++++- +++---++   ++++++++    ++++++    ++++++  ++++  ++++  
+                     --------+++                                             
+                       +++++++                                               
+```
+
 # @bagdock/pii-patterns
 
-PII regex patterns and scrubbing utilities for the [Bagdock](https://bagdock.com) platform.
+PII regex patterns and scrubbing utilities for the [Bagdock](https://bagdock.com) platform — 15-pattern defense-in-depth redaction for personally identifiable information.
+
+[![npm version](https://img.shields.io/npm/v/@bagdock/pii-patterns.svg)](https://www.npmjs.com/package/@bagdock/pii-patterns)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 ## Install
 
 ```bash
 npm install @bagdock/pii-patterns
+```
+
+```bash
+yarn add @bagdock/pii-patterns
+```
+
+```bash
+pnpm add @bagdock/pii-patterns
+```
+
+```bash
+bun add @bagdock/pii-patterns
 ```
 
 ## Usage
@@ -30,6 +59,20 @@ scrubMessagesForModel(messages)
 // → [{ role: 'system', content: 'You are helpful.' },
 //    { role: 'user', content: 'My SSN is [SSN_REDACTED]' }]
 ```
+
+## API
+
+### `scrubPii(text: string): string`
+
+Applies all 15 PII patterns in order and returns the redacted string.
+
+### `scrubPiiDeep(value: unknown): unknown`
+
+Recursively walks objects and arrays, scrubbing any string values. Non-string primitives pass through unchanged.
+
+### `scrubMessagesForModel<T>(messages: T[]): T[]`
+
+Scrubs PII from `user` role messages before AI inference. Assistant and system messages pass through unchanged. Returns a shallow copy — originals are not mutated.
 
 ## Patterns
 
@@ -61,4 +104,4 @@ authoritative PII scrubbing on the server edge before any AI model receives inpu
 
 ## License
 
-MIT
+MIT — see [LICENSE](LICENSE).
