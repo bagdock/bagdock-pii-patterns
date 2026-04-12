@@ -1,6 +1,6 @@
 {
   "name": "@bagdock/pii-patterns",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "PII regex patterns and scrubbing utilities for Bagdock",
   "license": "MIT",
   "main": "dist/index.js",
